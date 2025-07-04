@@ -41,8 +41,10 @@ def create_app():
 
     return app
 
+# 🔑 ESTA LÍNEA es CLAVE para Gunicorn:
+app = create_app()
 
+# Tu lógica especial al correr local:
 if __name__ == '__main__':
-    app = create_app()
     enviar_recordatorios(app)
     app.run(debug=True)
