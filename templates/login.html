@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Iniciar sesión - Biblioteca</title>
+
+  <!-- Bootstrap y íconos -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Tu CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+</head>
+<body>
+  <div class="login-box text-center">
+    <!-- ✅ Logo -->
+    <img 
+      src="{{ url_for('static', filename='imagenes/LOGO.png') }}" 
+      alt="Logo Biblioteca" 
+      width="100" 
+      class="mb-3 rounded-circle border border-2 border-light"
+      style="background-color: #1e3a8a; padding: 10px;">
+    
+    <h2 class="fw-semibold mb-1">Bienvenido</h2>
+    <p class="text-muted mb-4 small">Inicia sesión para continuar</p>
+
+    <form method="POST" action="{{ url_for('main.login') }}">
+      <!-- Correo -->
+      <div class="mb-3 text-start">
+        <label for="correo" class="form-label">Correo electrónico</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          <input type="email" id="correo" name="correo" class="form-control" placeholder="tucorreo@dominio.com" required autofocus>
+        </div>
+      </div>
+
+      <!-- Contraseña -->
+      <div class="mb-3 text-start">
+        <label for="password" class="form-label">Contraseña</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          <input type="password" id="password" name="password" class="form-control" placeholder="••••••••" required>
+          <button class="btn btn-outline-light" type="button" id="togglePassword">
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="d-grid gap-2 mt-4">
+        <button type="submit" class="btn btn-primary w-100">Iniciar sesión</button>
+        <a href="{{ url_for('main.registro') }}" class="btn btn-outline-secondary w-100">Crear cuenta</a>
+        <a href="{{ url_for('main.recuperar') }}" class="d-block mt-2 text-decoration-none small">¿Olvidaste tu contraseña?</a>
+      </div>
+    </form>
+  </div>
+
+  <!-- Script toggle password -->
+  <script>
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    const icon = togglePassword.querySelector('i');
+
+    togglePassword.addEventListener('click', () => {
+      const type = passwordInput.type === 'password' ? 'text' : 'password';
+      passwordInput.type = type;
+      icon.classList.toggle('bi-eye');
+      icon.classList.toggle('bi-eye-slash');
+    });
+  </script>
+
+  <!-- Bootstrap Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

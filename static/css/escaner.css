@@ -1,0 +1,77 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #1e293b; /* Fondo sólido azul oscuro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+.scanner-box {
+  background: #ffffff; /* Caja blanca sólida */
+  color: #333;
+  padding: 40px 35px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3); /* Sombra consistente */
+  width: 100%;
+  max-width: 420px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.descripcion-libro {
+  text-align: center;
+  font-size: 1rem;
+  margin-bottom: 25px;
+  color: #555;
+}
+
+.form-control {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+.form-control::placeholder {
+  color: #888;
+}
+
+.input-group-text {
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  color: #555;
+}
+
+.btn-primary {
+  background-color: #00bcd4;
+  border: none;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0097a7;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+#resultado {
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}

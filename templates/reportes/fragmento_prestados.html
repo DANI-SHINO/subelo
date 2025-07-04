@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Reporte de Libros Más Prestados</title>
+
+  <!-- Bootstrap y Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <!-- Tu CSS global para reportes -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reportes.css') }}">
+</head>
+<body>
+
+  <div class="login-box text-center">
+    <h2>
+      <i class="bi bi-bar-chart-line-fill me-2 text-primary"></i>
+      Reporte de Libros Más Prestados
+    </h2>
+    <p class="mb-4">Consulta los libros que más se han prestado en la biblioteca.</p>
+
+    <div class="table-responsive text-start">
+      <table class="table table-striped table-bordered align-middle mb-0">
+        <thead class="table-primary">
+          <tr>
+            <th>#</th>
+            <th>Libro</th>
+            <th>Autor</th>
+            <th>Total Préstamos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for l in prestados %}
+          <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ l.titulo }}</td>
+            <td>{{ l.autor }}</td>
+            <td>{{ l.total }}</td>
+          </tr>
+          {% else %}
+          <tr>
+            <td colspan="4" class="text-center text-muted">No hay libros prestados.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4">
+      <a href="{{ url_for('main.descargar_reporte_prestados') }}" class="btn btn-success d-inline-flex align-items-center">
+        <i class="bi bi-download me-1"></i> Descargar PDF
+      </a>
+      <button type="button" class="btn btn-secondary d-inline-flex align-items-center" onclick="window.history.back()">
+        <i class="bi bi-x-lg me-1"></i> Cerrar
+      </button>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

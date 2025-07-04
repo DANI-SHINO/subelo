@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Resultados de búsqueda{% endblock %}
+
+{% block content %}
+  <h2 class="text-center mb-4">Resultados para "{{ consulta }}"</h2>
+
+  {% if resultados %}
+    <div class="row">
+      {% for libro in resultados %}
+        <div class="col-md-4 mb-4">
+          <div class="card libro-card">
+            <div class="card-body">
+              <h5 class="card-title">{{ libro.titulo }}</h5>
+              <p class="card-text text-author">Autor: {{ libro.autor }}</p>
+              <p class="card-text"><small>{{ libro.descripcion[:100] }}...</small></p>
+              <!-- Botón ver más o reservar -->
+              <a href="#" class="btn btn-custom">Ver más</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center text-light">No se encontraron resultados.</p>
+  {% endif %}
+{% endblock %}

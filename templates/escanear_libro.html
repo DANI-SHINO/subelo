@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Escanear Libro</title>
+
+  <!-- Bootstrap + Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/escaner.css') }}">
+
+  <!-- Axios -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+  <div class="scanner-box text-center">
+    <!-- Título con ícono -->
+    <h2 class="mb-2">
+      <i class="bi bi-upc-scan me-2"></i>
+      Escanear Libro
+    </h2>
+    <p class="descripcion-libro mb-4">Escanea o escribe un ISBN para registrar un libro fácilmente.</p>
+
+    <form onsubmit="return false;">
+      <div class="mb-3">
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-upc"></i></span>
+          <input type="text" id="isbn_input" placeholder="Escanea o escribe ISBN..." autofocus class="form-control">
+        </div>
+      </div>
+    </form>
+
+    <div id="resultado">
+      <em>Escanea un libro para ver su información aquí.</em>
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById('isbn_input');
+    const resultado = document.getElementById('resultado');
+
+    input.addEventListener('input', () => {
+      const isbn = input.value.trim();
+
+      if (isbn.length === 13) {
+        resultado.innerHTML = "<strong><i class='bi bi-search'></i> Buscando...</strong>";
+
+        axios.get(`/api/datos_libro/${isbn}`)
+          .then(res => {
+            if (res.data.success) {
+              const datos = res.data;
+              resultado.innerHTML = `
+                <h4><i class="bi bi-journal-text"></i> ${datos.titulo}</h4>
+                <p><i class="bi bi-person"></i> <strong>Autor:</strong> ${datos.autor}</p>
+                <p><i class="bi bi-upc"></i> <strong>ISBN:</strong> ${isbn}</p>
+                <p><strong>¿Deseas registrarlo?</strong></p>
+                <a class="btn btn-primary" href="/admin/libros/nuevo?isbn=${isbn}">
+                  <i class="bi bi-check-circle"></i> Sí, registrar
+                </a>
+              `;
+            } else {
+              resultado.innerHTML = `<p><i class="bi bi-exclamation-circle"></i> No se encontraron datos.</p>`;
+            }
+          })
+          .catch(err => {
+            resultado.innerHTML = `
+              <p><i class="bi bi-upc"></i> <strong>ISBN:</strong> ${isbn}</p>
+              <p class="text-danger">
+                <i class="bi bi-x-circle"></i> <strong>No se encontró. ¿Registrar manualmente?</strong>
+              </p>
+              <a class="btn btn-secondary" href="/admin/libros/nuevo?isbn=${isbn}">
+                <i class="bi bi-pencil-square"></i> Registrar manualmente
+              </a>
+            `;
+          });
+
+        input.value = '';
+      }
+    });
+  </script>
+
+</body>
+</html>

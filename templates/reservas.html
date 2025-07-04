@@ -1,0 +1,47 @@
+<body style="background-color: #1e293b;">
+    <h2 class="ms-3 mt-4 text-white text-center fw-semibold">Gestión de Reservas</h2>
+    <p class="text-center text-light mb-4">Administra las reservas del sistema aquí.</p>
+
+    <div id="panel-container" class="reserva-panel-container px-4 d-flex justify-content-center">
+      <div class="reserva-panel bg-dark text-white p-4 rounded shadow-sm mb-4 text-center" style="max-width: 720px; width: 100%;">
+        <h4 class="fw-semibold">Panel de opciones</h4>
+        <p class="text-secondary small">Aquí puedes mostrar controles, tablas o estadísticas relacionadas con las reservas.</p>
+
+        <div class="mb-3">
+          <button id="btn-mostrar-reservas" type="button" class="btn btn-outline-primary me-2">Mostrar reservas</button>
+          <button id="btn-agregar-reservas" type="button" class="btn btn-outline-success me-2">Agregar reservas</button>
+        </div>
+
+        <div id="contenido-opcion" class="mt-4 bg-light text-dark p-3 rounded shadow-sm text-start"></div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="modalReserva" tabindex="-1" aria-labelledby="modalReservaLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content bg-white">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalReservaLabel">Modal</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body" id="modal-reserva-body"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap y JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/reservas.js') }}"></script>
+
+    <style>
+      #contenido-opcion {
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      #modal-reserva-body {
+        transition: opacity 0.3s ease-in-out;
+        opacity: 0;
+      }
+    </style>
+</body>

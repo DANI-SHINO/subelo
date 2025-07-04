@@ -1,0 +1,16 @@
+<h5>Lista de usuarios</h5>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr><th>ID</th><th>Usuario</th><th>Rol</th><th>Activo</th></tr>
+  </thead>
+  <tbody>
+    {% for usuario in usuarios %}
+      <tr>
+        <td>{{ usuario.id }}</td>
+        <td>{{ usuario.nombre }}</td>
+        <td>{{ usuario.rol }}</td>
+        <td>{{ 'Sí' if usuario.activo else 'No' }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

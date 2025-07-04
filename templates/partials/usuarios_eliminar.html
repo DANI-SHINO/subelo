@@ -1,0 +1,11 @@
+<h5>Activar/Desactivar usuarios</h5>
+{% for usuario in usuarios %}
+  {% if usuario.username != 'admin' %}
+    <form action="{{ url_for('main.toggle_usuario', usuario_id=usuario.id) }}" method="POST" class="mb-2 d-flex align-items-center">
+      <span class="me-3">{{ usuario.username }}</span>
+      <button type="submit" class="btn btn-{{ 'danger' if usuario.activo else 'success' }} btn-sm">
+        {{ 'Desactivar' if usuario.activo else 'Activar' }}
+      </button>
+    </form>
+  {% endif %}
+{% endfor %}

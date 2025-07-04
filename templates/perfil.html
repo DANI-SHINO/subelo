@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil del Usuario</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <style>
+    body {
+      background-color: #0a0a23;
+      color: white;
+    }
+    .perfil-container {
+      max-width: 600px;
+      background-color: #1c1c3c;
+      padding: 2rem;
+      border-radius: 10px;
+      margin: 2rem auto;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    }
+    .perfil-img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #6c757d;
+      margin-bottom: 1rem;
+    }
+    .label {
+      font-weight: bold;
+      color: #ccc;
+    }
+    .btn-edit {
+      background-color: #00bcd4;
+      border: none;
+      color: #fff;
+    }
+    .btn-edit:hover {
+      background-color: #0097a7;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="perfil-container text-center">
+      <!-- ✅ Foto de perfil con fallback -->
+      <img src="{{ url_for('static', filename='fotos_perfil/' + (current_user.foto if current_user.foto else 'default_user.png')) }}"
+           alt="Foto de perfil"
+           class="perfil-img">
+
+      <h3 class="mb-3">{{ current_user.username }}</h3>
+
+      <p><span class="label">Correo:</span> {{ current_user.correo }}</p>
+      <p><span class="label">Rol:</span> {{ current_user.rol | capitalize }}</p>
+      <p>
+        <span class="label">Estado:</span>
+        {% if current_user.activo %}
+          <span class="badge bg-success">Activo</span>
+        {% else %}
+          <span class="badge bg-danger">Inactivo</span>
+        {% endif %}
+      </p>
+      <p><span class="label">Miembro desde:</span> {{ current_user.fecha_creacion.strftime('%Y-%m-%d') }}</p>
+
+      {% if current_user.rol in ['lector', 'bibliotecario'] %}
+        <hr class="my-4">
+        <p class="text-info fs-5">🔐 <strong>Llave de préstamo:</strong></p>
+        <div class="bg-dark p-2 rounded mb-3">
+          <code class="text-warning fs-4">{{ current_user.llave_prestamo }}</code>
+        </div>
+        <p class="text-muted">Guarda esta llave, es necesaria para realizar préstamos y reservas.</p>
+      {% endif %}
+
+      <!-- Botón Editar perfil -->
+      <a href="{{ url_for('main.configuracion') }}" class="btn btn-edit mt-4 me-2">
+        ✏️ Editar perfil
+      </a>
+
+      <!-- ✅ Botón volver según rol -->
+      {% if current_user.rol == 'lector' %}
+        <a href="{{ url_for('main.catalogo') }}" class="btn btn-secondary mt-4">
+          Volver al catálogo
+        </a>
+      {% else %}
+        <a href="{{ url_for('main.index') }}" class="btn btn-secondary mt-4">
+          Volver al inicio
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Avocado</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #0a0a23;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+    .navbar {
+      background-color: #0a0a23;
+    }
+    .navbar-brand img {
+      width: 40px;
+      height: 40px;
+    }
+    .dropdown-menu {
+      background-color: #1c1c3c;
+      border: 1px solid #333;
+      border-radius: 10px;
+    }
+    .dropdown-menu a {
+      color: white;
+    }
+    .dropdown-menu a:hover {
+      background-color: #2a2a50;
+    }
+    .btn-custom {
+      background-color: #1c1c3c;
+      color: white;
+      border: 2px solid #555;
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-size: 14px;
+    }
+    .btn-custom:hover {
+      background-color: #2a2a50;
+    }
+    .form-control {
+      background-color: #1c1c3c;
+      border: 1px solid #555;
+      color: white;
+    }
+    .form-control::placeholder {
+      color: #bbb;
+    }
+    .favorite-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      color: white;
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .favorite-icon.favorited {
+      color: red;
+    }
+    h1.text-center {
+      margin-top: 40px;
+    }
+    .small-carousel-img {
+      height: 250px;
+      width: auto;
+      object-fit: cover;
+      margin: 0;
+      border-radius: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Barra de navegación -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="static\imagenes\logofinal.png" alt="Logo">
+        <span class="ms-2 text-white fw-bold">Avocado</span>
+      </a> 
+      <div class="mx-auto d-flex gap-3">
+        <div class="dropdown">
+          <button class="btn btn-custom dropdown-toggle" type="button" data-bs-toggle="dropdown">Libros</button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Autores</a></li>
+            <li><a class="dropdown-item" href="#">Historia</a></li>
+            <li><a class="dropdown-item" href="#">Bélico</a></li>
+            <li><a class="dropdown-item" href="#">Terror</a></li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <button class="btn btn-custom dropdown-toggle" type="button" data-bs-toggle="dropdown">Menú</button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url_for('main.logout') }}">Cerrar Sesión</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#configModal">Configuración</a></li>
+            <li><a href="favoritos.html" class="btn btn-warning ms-auto">⭐ Mis Favoritos</a></li>
+            <li><a class="dropdown-item" href="editar-perfil.html">Editar Perfil</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#contactModal">Contáctanos</a></li>
+            <li><a class="dropdown-item" href="#">Preguntas Frecuentes</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <form class="d-flex ms-auto" role="search">
+        <input class="form-control me-2" type="search" placeholder="Buscar libros..." aria-label="Buscar">
+        <button class="btn btn-custom" type="submit">Buscar</button>
+      </form>
+    </div>
+  </nav>
+
+  <!-- Carrusel de categorías -->
+  <div class="container my-4">
+    <div id="categoryCarousel" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner d-flex">
+        <div class="carousel-item active">
+          <div class="d-flex flex-wrap justify-content-center category-carousel">
+            <button class="btn btn-outline-light m-1">Audiolibros</button>
+            <button class="btn btn-outline-light m-1">Cuento</button>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <div class="d-flex flex-wrap justify-content-center category-carousel">
+            <button class="btn btn-outline-light m-1">Novela</button>
+            <button class="btn btn-outline-light m-1">Filosofía</button>
+            <button class="btn btn-outline-light m-1">Poesía</button>
+            <button class="btn btn-outline-light m-1">Teatro</button>
+            <button class="btn btn-outline-light m-1">Ensayo</button>
+            <button class="btn btn-outline-light m-1">Crónica</button>
+            <button class="btn btn-outline-light m-1">Historieta</button>
+            <button class="btn btn-outline-light m-1">Biografía</button>
+          </div>
+        </div>
+      </div>
+      
+      <button class="carousel-control-prev" type="button" data-bs-target="#categoryCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#categoryCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Carrusel de libros con 6 filas x 4 columnas -->
+<div id="bookCarousel" class="carousel slide mt-5" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+  <div class="container">
+    
+    <!-- Fila 1 -->
+<!-- Fila 1 -->
+<div class="row">
+  <div class="col-3 p-2">
+    <div class="book-thumbnail-wrapper">
+      <i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i>
+      <img src="static\imagenes\libro1.webp" class="book-thumbnail">
+    </div>
+    <div class="book-info">
+      <h5>1984</h5>
+      <p><strong>Autor:</strong> George Orwell</p>
+      <p>Una novela distópica sobre una sociedad vigilada por el Gran Hermano.</p>
+      <a href="detalle-libro.html?libro=1984">Ver más</a>
+    </div>
+  </div>
+  <div class="col-3 p-2">
+    <div class="book-thumbnail-wrapper">
+      <i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i>
+      <img src="static\imagenes\libro2.avif" class="book-thumbnail">
+    </div>
+    <div class="book-info">
+      <h5>Crónica de una muerte anunciada</h5>
+      <p><strong>Autor:</strong> Gabriel García Márquez</p>
+      <p>Una historia breve sobre el destino y la fatalidad en un pueblo latinoamericano.</p>
+      <a href="detalle-libro.html?libro=cronica">Ver más</a>
+    </div>
+  </div>
+  <div class="col-3 p-2">
+    <div class="book-thumbnail-wrapper">
+      <i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i>
+      <img src="libro3.jpg" class="book-thumbnail">
+    </div>
+    <div class="book-info">
+      <h5>El Principito</h5>
+      <p><strong>Autor:</strong> Antoine de Saint-Exupéry</p>
+      <p>Un cuento filosófico que explora la naturaleza humana a través de los ojos de un niño.</p>
+      <a href="detalle-libro.html?libro=principito">Ver más</a>
+    </div>
+  </div>
+  <div class="col-3 p-2">
+    <div class="book-thumbnail-wrapper">
+      <i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i>
+      <img src="libro4.jpg" class="book-thumbnail">
+    </div>
+    <div class="book-info">
+      <h5>Orgullo y prejuicio</h5>
+      <p><strong>Autor:</strong> Jane Austen</p>
+      <p>Una crítica social y una historia de amor ambientada en la Inglaterra del siglo XIX.</p>
+      <a href="detalle-libro.html?libro=orgullo">Ver más</a>
+    </div>
+  </div>
+</div>
+    <!-- Fila 2 -->
+    <div class="row">
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro5.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro6.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro7.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro8.jpg" class="book-thumbnail"></div></div>
+    </div>
+
+    <!-- Fila 3 -->
+    <div class="row">
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro9.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro10.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro11.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro12.jpg" class="book-thumbnail"></div></div>
+    </div>
+
+    <!-- Fila 4 -->
+    <div class="row">
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro13.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro14.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro15.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro16.jpg" class="book-thumbnail"></div></div>
+    </div>
+
+    <!-- Fila 5 -->
+    <div class="row">
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro17.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro18.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro19.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro20.jpg" class="book-thumbnail"></div></div>
+    </div>
+
+    <!-- Fila 6 -->
+    <div class="row">
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro21.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro22.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro23.jpg" class="book-thumbnail"></div></div>
+      <div class="col-3 p-2"><div class="book-thumbnail-wrapper"><i class="favorite-icon-inline" onclick="toggleFavorite(this)">❤️</i><img src="libro24.jpg" class="book-thumbnail"></div></div>
+    </div>
+  </div>
+
+  <!-- Script de favoritos -->
+  <script>
+    function toggleFavorite(icon) {
+      icon.classList.toggle('active');
+    }
+  </script>
+
+
+
+  <!-- Controles -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#bookCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#bookCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+</div>
+
+
+
+
+  <!-- Modal: Configuración -->
+    <div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="configModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center bg-light text-dark rounded-4 p-4">
+          <div class="modal-header border-0">
+            <h5 class="modal-title w-100" id="configModalLabel">Tamaño de la interfaz</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body d-flex justify-content-around align-items-center">
+            <div>
+              <img src="libro1.webp" alt="Tamaño estándar" width="80" onclick="cambiarTamaño('pequeño')" style="cursor:pointer;">
+              <p class="mt-2">Tamaño<br>Estándar</p>
+            </div>
+            <div>
+              <img src="" alt="Tamaño aumentado" width="100" onclick="cambiarTamaño('grande')" style="cursor:pointer;">
+              <p class="mt-2">Tamaño<br><strong>Aumentado</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- Modal: Contáctanos -->
+  <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-dark text-white border-secondary">
+        <div class="modal-header">
+          <h5 class="modal-title" id="contactModalLabel">Contáctanos</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body">
+          <p><strong>Email:</strong> contacto@avocado.com</p>
+          <p><strong>Teléfono:</strong> +57 300 000 0000</p>
+          <p><strong>Horario:</strong> Nunca</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Información del libro -->
+<div class="modal fade" id="bookInfoModal" tabindex="-1" aria-labelledby="bookInfoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <h5 class="modal-title" id="bookTitle">Título del Libro</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Autor:</strong> <span id="bookAuthor">---</span></p>
+        <p><strong>Resumen:</strong> <span id="bookSummary">---</span></p>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <button id="favBtn" class="btn btn-outline-danger">❤️ Agregar a favoritos</button>
+        <a id="readMoreBtn" class="btn btn-primary" href="#" target="_blank">Leer más</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const books = {
+    "libro1.webp": {
+      title: "1984",
+      author: "George Orwell",
+      summary: "Una novela distópica sobre una sociedad vigilada por el Gran Hermano.",
+      link: "detalle-libro.html?libro=1984"
+    },
+    "libro2.": {
+      title: "Don Quijote de la Mancha",
+      author: "Miguel de Cervantes",
+      summary: "Un hidalgo enloquecido por los libros de caballería se lanza a vivir sus propias aventuras.",
+      link: "detalle-libro.html?libro=quijote"
+    },
+    "libro3.jpg": {
+      title: "Cien años de soledad",
+      author: "Gabriel García Márquez",
+      summary: "La historia mágica de la familia Buendía a lo largo de generaciones.",
+      link: "detalle-libro.html?libro=cien"
+    },
+    "libro4.jpg": {
+      title: "El Principito",
+      author: "Antoine de Saint-Exupéry",
+      summary: "Un piloto conoce a un pequeño príncipe de otro planeta y aprenden sobre la vida y el amor.",
+      link: "detalle-libro.html?libro=principito"
+    },
+    "libro5.jpg": {
+      title: "Frankenstein",
+      author: "Mary Shelley",
+      summary: "Un científico crea una criatura con consecuencias trágicas.",
+      link: "detalle-libro.html?libro=frankenstein"
+    },
+    "libro6.jpg": {
+      title: "La Odisea",
+      author: "Homero",
+      summary: "El épico viaje de Odiseo para regresar a Ítaca tras la guerra de Troya.",
+      link: "detalle-libro.html?libro=odisea"
+    },
+    "libro7.jpg": {
+      title: "Rayuela",
+      author: "Julio Cortázar",
+      summary: "Una novela experimental sobre el amor, la vida y el caos.",
+      link: "detalle-libro.html?libro=rayuela"
+    },
+    "libro8.jpg": {
+      title: "La sombra del viento",
+      author: "Carlos Ruiz Zafón",
+      summary: "Un joven descubre un libro que cambiará su vida en la Barcelona de la posguerra.",
+      link: "detalle-libro.html?libro=sombra"
+    },
+    "libro9.jpg": {
+      title: "Fahrenheit 451",
+      author: "Ray Bradbury",
+      summary: "Un futuro donde los libros están prohibidos y los bomberos los queman.",
+      link: "detalle-libro.html?libro=fahrenheit"
+    }
+  };
+
+  const favBtn = document.getElementById('favBtn');
+
+  document.querySelectorAll('.book-thumbnail').forEach(img => {
+    img.classList.add('small-carousel-img');
+    img.addEventListener('click', () => {
+      const src = img.getAttribute('src');
+      const book = books[src];
+      if (book) {
+        document.getElementById('bookTitle').textContent = book.title;
+        document.getElementById('bookAuthor').textContent = book.author;
+        document.getElementById('bookSummary').textContent = book.summary;
+        document.getElementById('readMoreBtn').href = book.link;
+
+        // Resetear botón de favoritos
+        favBtn.classList.remove('btn-danger');
+        favBtn.classList.add('btn-outline-danger');
+        favBtn.textContent = '❤️ Agregar a favoritos';
+
+        new bootstrap.Modal(document.getElementById('bookInfoModal')).show();
+      }
+    });
+  });
+
+  // Acción del botón de favoritos
+  favBtn.addEventListener('click', () => {
+    if (favBtn.classList.contains('btn-outline-danger')) {
+      favBtn.classList.remove('btn-outline-danger');
+      favBtn.classList.add('btn-danger');
+      favBtn.textContent = '❤️ Favorito';
+    } else {
+      favBtn.classList.remove('btn-danger');
+      favBtn.classList.add('btn-outline-danger');
+      favBtn.textContent = '❤️ Agregar a favoritos';
+    }
+  });
+</script>
+
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    function cerrarSesion() {
+      sessionStorage.clear();
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
+  </script>
+
+
+<script>
+  function toggleFavorite(imageSrc) {
+    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+    if (!favorites.includes(imageSrc)) {
+      favorites.push(imageSrc);
+    } else {
+      favorites = favorites.filter(img => img !== imageSrc);
+    }
+
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }
+</script>
+
+
+</body>
+</html>

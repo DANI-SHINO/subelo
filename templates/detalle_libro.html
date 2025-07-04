@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles del Libro: {{ libro.titulo }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="card mb-3 shadow-sm border-0"
+       style="background-color: #1e293b; color: #f1f5f9; border-radius: 10px;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img src="{{ libro.portada_url if libro.portada_url else url_for('static', filename='imagenes/portada_default.png') }}"
+             class="img-fluid rounded-start h-100 w-100"
+             alt="Portada del libro '{{ libro.titulo }}'"
+             style="object-fit: contain; background-color: #0f172a; padding: 10px;">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h2 class="card-title text-accent mb-3">{{ libro.titulo }}</h2>
+          <p><strong>Autor:</strong> {{ libro.autor }}</p>
+          <p><strong>Editorial:</strong> {{ libro.editorial or 'N/A' }}</p>
+          <p><strong>Categoría:</strong> {{ libro.categoria or 'N/A' }}</p>
+          <p><strong>Fecha de Publicación:</strong> {{ libro.fecha_publicacion.strftime('%Y-%m-%d') if libro.fecha_publicacion else 'N/A' }}</p>
+          <p><strong>ISBN:</strong> {{ libro.isbn or 'N/A' }}</p>
+          <p><strong>Descripción:</strong> {{ libro.descripcion or 'Sin descripción.' }}</p>
+          <p>
+            <strong>Disponibles:</strong>
+            {% if libro.cantidad_disponible > 0 %}
+              <span class="badge bg-success">{{ libro.cantidad_disponible }}</span>
+            {% else %}
+              <span class="badge bg-danger">No disponible</span>
+            {% endif %}
+          </p>
+
+          <div class="mt-4 d-flex flex-wrap gap-2">
+            {% if current_user.is_authenticated and current_user.rol == 'lector' %}
+              <form action="{{ url_for('main.toggle_favorito', libro_id=libro.id) }}" method="POST" class="d-inline">
+                <button type="submit" class="btn {% if es_favorito %}btn-danger{% else %}btn-outline-danger{% endif %}">
+                  <i class="bi {% if es_favorito %}bi-heart-fill{% else %}bi-heart{% endif %} me-1"></i>
+                  {% if es_favorito %}Quitar de favoritos{% else %}Añadir a favoritos{% endif %}
+                </button>
+              </form>
+
+              {% if libro.cantidad_disponible > 0 %}
+                <a href="{{ url_for('main.reservar_libro_lector', libro_id=libro.id) }}" class="btn btn-success">
+                  <i class="bi bi-bookmark-check-fill me-1"></i> Reservar Libro
+                </a>
+              {% else %}
+                <button class="btn btn-secondary disabled">
+                  <i class="bi bi-bookmark-x me-1"></i> No disponible
+                </button>
+              {% endif %}
+            {% endif %}
+
+            <a href="{{ url_for('main.catalogo') }}" class="btn btn-outline-light">
+              <i class="bi bi-arrow-left-circle me-1"></i> Volver al Catálogo
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

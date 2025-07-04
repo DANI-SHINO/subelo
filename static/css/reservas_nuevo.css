@@ -1,0 +1,35 @@
+
+    body {
+      background: #1e293b;;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .form-box {
+      background: #fff;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      max-width: 480px;
+      width: 100%;
+    }
+
+    .form-box h2 {
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #1e293b;
+      text-align: center;
+    }
+
+    .descripcion-libro {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 25px;
+    }
+
+    .btn {
+      min-width: 120px;
+    }

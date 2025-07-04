@@ -1,0 +1,111 @@
+/* Fondo general de la página */
+html, body {
+  height: 100%;
+  margin: 0;
+  background: #1e293b;  /* ✅ Fondo sólido azul oscuro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+
+/* Caja del formulario */
+.login-box {
+  background: #ffffff; /* ✅ Caja blanca sólida */
+  color: #333; /* Texto oscuro dentro de la caja */
+  padding: 40px 35px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 700px; /* Ancho para dos columnas cómodas */
+}
+
+/* Logo */
+.login-box img {
+  background: none;
+  padding: 0;
+}
+
+/* Inputs */
+.form-control {
+  background-color: #f9f9f9; /* Fondo claro en los inputs */
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+.form-control::placeholder {
+  color: #888;
+}
+
+/* Label de campos */
+.form-label {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Iconos dentro del input */
+.input-group-text {
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  color: #555;
+}
+
+/* Botón principal */
+.btn-primary {
+  background-color: #00bcd4;
+  border: none;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #0097a7;
+}
+
+/* Links */
+a {
+  color: #00bcd4;
+}
+
+a:hover {
+  color: #0097a7;
+  text-decoration: underline;
+}
+
+/* Eliminar icono de mostrar/ocultar pass (si aplica) */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none;
+}
+
+input[type="password"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Botón mostrar/ocultar contraseña (si aplica) */
+#togglePassword {
+  border: 1px solid #ddd;
+  background: #f1f1f1;
+  color: #555;
+}
+
+#togglePassword:hover {
+  background: #e2e6ea;
+  color: #333;
+}
+
+#togglePassword i {
+  font-size: 1rem;
+}
+
+/* Responsive para pantallas pequeñas: una columna */
+@media (max-width: 768px) {
+  .login-box {
+    max-width: 100%;
+    margin: 20px;
+    padding: 30px 20px;
+  }
+}

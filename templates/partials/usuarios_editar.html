@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Editar Usuario</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body style="background-color: #f8f9fa;">
+
+  <div class="container py-4">
+    <h4 class="mb-4">Editar Usuario</h4>
+
+      <form method="POST" action="{{ url_for('main.editar_usuario', id=usuario.id) }}" class="text-start bg-white p-4 rounded shadow-sm">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+          {{ form.nombre.label(class="form-label") }}
+          {{ form.nombre(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+          {{ form.correo.label(class="form-label") }}
+          {{ form.correo(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+          {{ form.direccion.label(class="form-label") }}
+          {{ form.direccion(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+          {{ form.rol.label(class="form-label") }}
+          {{ form.rol(class="form-select") }}
+        </div>
+
+        <div class="d-flex justify-content-end gap-2">
+          <button type="button" class="btn btn-secondary btn-cancelar-usuario">Cancelar</button>
+          {{ form.submit(class="btn btn-primary") }}
+        </div>
+      </form>
+
+
+  </div>
+
+  <script>
+    document.getElementById("form-editar-usuario").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const datos = {
+        id: this.querySelector('[name="id"]').value,
+        nombre: this.querySelector('[name="nombre"]').value,
+        correo: this.querySelector('[name="correo"]').value,
+        direccion: this.querySelector('[name="direccion"]').value,
+        rol: this.querySelector('[name="rol"]').value
+      };
+
+      console.log("DEBUG:", datos);
+
+      fetch("/admin/usuarios/editar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(datos)
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.mensaje || "Usuario actualizado correctamente");
+        window.location.reload();
+      })
+      .catch(err => {
+        console.error("Error:", err);
+        alert("Error inesperado");
+      });
+    });
+
+    document.querySelector(".btn-cancelar-usuario").addEventListener("click", function () {
+      window.history.back();
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

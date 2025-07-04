@@ -1,0 +1,87 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: #bbb4b4; /* Fondo claro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+.form-container {
+  background-color: #fff; /* Caja blanca */
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 900px; /* Más ancho para dos columnas */
+}
+
+.form-control {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+.form-control::placeholder {
+  color: #888;
+}
+
+.input-group-text {
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  color: #555;
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.btn-success {
+  background-color: #00c853;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #00b248;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.error-message {
+  color: #d9534f;
+  font-size: 0.85rem;
+}
+
+a {
+  color: #00bcd4;
+}
+
+a:hover {
+  color: #0097a7;
+  text-decoration: underline;
+}
+
+/* ✅ Layout en dos columnas */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columnas iguales */
+  gap: 20px; /* Espacio entre columnas */
+}
+
+.form-grid .mb-3 {
+  margin-bottom: 20px;
+}
+
+/* ✅ Botones a ancho completo */
+.d-grid {
+  grid-column: span 2; /* Que ocupe las 2 columnas */
+}

@@ -1,0 +1,40 @@
+
+    body {
+      background: #1e293b; /* Fondo azul */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .login-box {
+      background: #ffffff;
+      padding: 40px 35px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 900px;
+      color: #000; /* Texto negro dentro */
+    }
+
+    .login-box h2 {
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #000; /* Título negro */
+    }
+
+    .login-box p {
+      font-size: 0.95rem;
+      color: #333; /* Subtítulo más oscuro */
+      margin-bottom: 25px;
+    }
+
+    .table-responsive {
+      margin-top: 20px;
+    }
+
+    .btn {
+      min-width: 140px;
+    }

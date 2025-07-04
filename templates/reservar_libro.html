@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Reservar Libro{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+
+      <!-- Encabezado centrado -->
+      <h2 class="mb-4 text-center">Reservar: <span class="text-primary">{{ libro.titulo }}</span></h2>
+
+      <!-- Tarjeta de información del libro ajustada -->
+      <div class="card mb-4 shadow-sm border-0 overflow-hidden">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{ libro.portada_url if libro.portada_url else url_for('static', filename='imagenes/portada_default.png') }}"
+                 alt="Portada de {{ libro.titulo }}"
+                 class="img-fluid h-100"
+                 style="object-fit: cover; min-height: 220px;">
+          </div>
+          <div class="col-md-8 d-flex align-items-center">
+            <div class="card-body p-3">
+              <h5 class="card-title mb-2">{{ libro.titulo }}</h5>
+              <p class="mb-1"><strong>Autor:</strong> {{ libro.autor }}</p>
+              <p class="mb-1"><strong>Categoría:</strong> {{ libro.categoria or 'N/A' }}</p>
+              <p class="mb-1"><strong>Editorial:</strong> {{ libro.editorial or 'N/A' }}</p>
+              <p class="mb-0"><strong>Disponible:</strong>
+                {% if libro.cantidad_disponible > 0 %}
+                  <span class="badge bg-success">{{ libro.cantidad_disponible }}</span>
+                {% else %}
+                  <span class="badge bg-danger">No disponible</span>
+                {% endif %}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de reserva centrado -->
+      <form method="POST" class="card p-4 shadow-sm border-0">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+          <label for="llave_prestamo" class="form-label">Llave de Préstamo</label>
+          {{ form.llave_prestamo(class="form-control", placeholder="Ejemplo: 123-456") }}
+          {% for error in form.llave_prestamo.errors %}
+            <div class="text-danger">{{ error }}</div>
+          {% endfor %}
+        </div>
+
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-success">
+            <i class="bi bi-bookmark-check-fill me-1"></i> Confirmar Reserva
+          </button>
+          <a href="{{ url_for('main.catalogo') }}" class="btn btn-secondary">
+            <i class="bi bi-x-circle me-1"></i> Cancelar
+          </a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

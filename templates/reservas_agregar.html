@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nueva Reserva</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reservas_nuevo.css') }}">
+</head>
+<body>
+
+  <div class="form-box">
+    <h2><i class="bi bi-journal-bookmark me-2"></i> Registrar Nueva Reserva</h2>
+    <p class="descripcion-libro">
+      Coloca la llave del usuario para verificar su correo, selecciona el libro y guarda la reserva.
+    </p>
+
+    <form method="POST" action="{{ url_for('main.reservas_agregar') }}">
+      {{ form.hidden_tag() }}
+
+      <!-- Llave -->
+      <div class="mb-3">
+        {{ form.llave_prestamo.label(class="form-label") }}
+        {{ form.llave_prestamo(class="form-control", id="llave_input", placeholder="Ej: 123-456") }}
+        {% for error in form.llave_prestamo.errors %}
+          <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <!-- Correo auto -->
+      <div class="mb-3">
+        <label class="form-label">Correo del Usuario</label>
+        <input type="email" class="form-control" id="correo_usuario" readonly>
+        <input type="hidden" name="usuario_id" id="usuario_id">
+      </div>
+
+      <!-- Nombre del Usuario -->
+      <div class="mb-3">
+        <label class="form-label">Nombre del Usuario</label>
+        <input type="text" class="form-control" id="nombre_usuario" readonly>
+      </div>
+
+      <!-- Libro -->
+      <div class="mb-3">
+        {{ form.libro_id.label(class="form-label") }}
+        {{ form.libro_id(class="form-select") }}
+        {% for error in form.libro_id.errors %}
+          <div class="text-danger">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <!-- Fecha expiración oculta -->
+      {{ form.fecha_expiracion(type="hidden") }}
+
+      <!-- Botón Guardar centrado -->
+      <div class="text-center mt-4">
+        {{ form.submit(class="btn btn-success") }}
+      </div>
+    </form>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $('#llave_input').on('blur', function () {
+      const llave = $(this).val().trim();
+      if (llave) {
+        $.getJSON('{{ url_for("main.ajax_buscar_usuario_por_llave") }}', { llave: llave }, function (data) {
+          if (data.success) {
+            $('#correo_usuario').val(data.correo);
+            $('#nombre_usuario').val(data.nombre);
+            $('#usuario_id').val(data.usuario_id);
+          } else {
+            $('#correo_usuario').val('No encontrado');
+            $('#nombre_usuario').val('No encontrado');
+            $('#usuario_id').val('');
+          }
+        });
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+Flask==3.0.0
+Flask-Login
+Flask-SQLAlchemy
+SQLAlchemy
+PyMySQL
+Werkzeug
+Flask-WTF
+WTForms
+email-validator
+requests
+Flask-Mail
+Pillow
+itsdangerous
+gunicorn
+python-dotenv  # solo si usas .env local (opcional)
+psycopg2-binary
+
+
+
+# pip install -r requirements.txt
+
+# drop database biblioteca_db;
+
+# create database biblioteca_db;
+
+# INSERT INTO `libros` (`id`, `titulo`, `autor`, `categoria`, `cantidad_total`, `cantidad_disponible`, `fecha_publicacion`, `editorial`, `isbn`, `descripcion`, `fecha_creacion`, `estado`, `portada_url`) VALUES
+# (1, 'Cien años de soledad', 'Gabriel Garcia Marquez', 'historieta', 4, 4, '2009-01-01', 'Vintage Español', '9780307474728', 'XD', '2025-06-26', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780307474728-L.jpg?default=false'),
+# (2, 'La mano peluda', 'Saúl Zaid', 'historieta', 3, 3, '2005-01-01', 'Editores Mexicanos Unidos', '9789681519193', 'xD', '2025-06-26', 'disponible', 'https://covers.openlibrary.org/b/id/12462791-L.jpg'),
+# (3, 'The City & the City', 'China Miéville, China Miéville', 'filosofia', 4, 4, '2025-06-26', 'imusti, Pan Publishing', '9780330534192', 'XD', '2025-06-26', 'disponible', 'https://covers.openlibrary.org/b/id/10091244-L.jpg'),
+# (4, 'Sophie''s World', 'Jostein Gaarder', 'novela', 4, 4, '1995-01-01', 'Phoenix House, Weidenfeld & Nicolson, Orion Publishing Group, Limited', '9781857992915', 'XD', '2025-06-26', 'disponible', 'https://covers.openlibrary.org/b/id/11550666-L.jpg'),
+# (5, 'Betty Broderick', 'Betty Broderick', 'novela', 3, 3, NULL, 'CreateSpace Independent Publishing Platform', '9781511518628', 'XD', '2025-06-26', 'disponible', 'https://covers.openlibrary.org/b/id/10131349-L.jpg'),
+# (6, 'The Guilty', 'David Baldacci', 'novela', 2, 2, NULL, 'Grand Central Publishing', '9781455586424', 'XD', '2025-06-26', 'disponible', 'https://covers.openlibrary.org/b/id/12659749-L.jpg'),
+# (7, 'Hábitos Atómicos', 'James Clear', 'novela', 5, 5, '2016-01-01', 'Paidos', '9786077476719', 'XD', '2025-06-26', 'disponible', 'https://covers.openlibrary.org/b/id/15073719-L.jpg'),
+# (8, 'Romper el Círculo (It Ends with Us)', 'Colleen Hoover', 'novela', 2, 2, '2022-01-01', 'Editorial Planeta, S. A.', '9786070788147', 'XD', '2025-06-26', 'disponible', 'https://covers.openlibrary.org/b/id/12916665-L.jpg'),
+# (9, 'Harry Potter y la piedra filosofal', 'J. K. Rowling', 'novela', 1, 1, NULL, 'Emecé Editores', '9788478885619', 'XD', '2025-06-26', 'disponible', 'https://covers.openlibrary.org/b/id/14925450-L.jpg'),
+# (10, 'Twisted 1. Twisted Love', 'Ana Huang', 'novela', 3, 3, '2022-01-01', 'Editorial Planeta, S. A.', '9786070793677', 'XD', '2025-06-26', 'disponible', 'https://covers.openlibrary.org/b/id/13180424-L.jpg'),
+# (11, 'Five Nights at Freddy’s', 'Scott Cawthon, Andrea Waggener, Elley Cooper, Kelly Parra', 'cuento', 4, 3, NULL, 'Scholastic Inc.', '9781338576054', 'XD', '2025-06-26', 'disponible', 'https://covers.openlibrary.org/b/id/14822857-L.jpg'),
+# (12, 'The Silver Eyes (Five Nights At Freddy''s #1)', 'Scott Cawthon, Kira Breed-Wrisley, Kira Breed-Wrisley, Kira Breed-Wrisley Scott Cawthon, Suzanne Eli', 'cuento', 3, 3, '2016-01-01', 'Scholastic', '9781338134377', 'XD', '2025-06-26', 'disponible', 'https://covers.openlibrary.org/b/id/15055364-L.jpg'),15055364-L.jpg');
+# (13, 'El Principito', 'Antoine de Saint-Exupéry', 'literatura infantil', 5, 5, '1943-04-06', 'Reynal & Hitchcock', '9780156013915', 'Un clásico de la literatura infantil y adulta.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780156013915-L.jpg'),
+# (14, 'Don Quijote de la Mancha', 'Miguel de Cervantes Saavedra', 'novela clásica', 3, 3, '1605-01-16', 'Juan de la Cuesta', '9788424119329', 'Una obra cumbre de la literatura española.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9788424119329-L.jpg'),
+# (15, '1984', 'George Orwell', 'ciencia ficción', 4, 4, '1949-06-08', 'Secker & Warburg', '9780451524935', 'Una distopía sobre un futuro totalitario.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg'),
+# (16, 'Orgullo y prejuicio', 'Jane Austen', 'novela romántica', 5, 5, '1813-01-28', 'T. Egerton, Whitehall', '9780141439518', 'Un clásico de la literatura inglesa sobre el amor y la sociedad.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780141439518-L.jpg'),
+# (17, 'Crimen y castigo', 'Fiódor Dostoievski', 'novela filosófica', 3, 3, '1866-01-01', 'The Russian Messenger', '9780486415871', 'Una profunda exploración de la moralidad y la culpa.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780486415871-L.jpg'),
+# (18, 'El Gran Gatsby', 'F. Scott Fitzgerald', 'novela clásica', 4, 4, '1925-04-10', 'Charles Scribner''s Sons', '9780743273565', 'Un retrato de la era del Jazz y el sueño americano.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780743273565-L.jpg'),
+# (19, 'Matar a un ruiseñor', 'Harper Lee', 'novela clásica', 5, 5, '1960-07-11', 'J. B. Lippincott & Co.', '9780446310789', 'Una historia sobre la injusticia racial en el sur de Estados Unidos.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780446310789-L.jpg'),
+# (20, 'En el camino', 'Jack Kerouac', 'literatura beat', 2, 2, '1957-09-05', 'Viking Press', '9780140042597', 'Un viaje a través de Estados Unidos, símbolo de la Generación Beat.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780140042597-L.jpg'),
+# (21, 'Un mundo feliz', 'Aldous Huxley', 'ciencia ficción', 4, 4, '1932-01-01', 'Chatto & Windus', '9780060850524', 'Una distopía que explora los peligros de la tecnología y el control social.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780060850524-L.jpg'),
+# (22, 'El Hobbit', 'J.R.R. Tolkien', 'fantasía', 5, 5, '1937-09-21', 'George Allen & Unwin', '9780345339683', 'El inicio de la aventura en la Tierra Media.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780345339683-L.jpg'),
+# (23, 'La Odisea', 'Homero', 'épica', 3, 3, '-750-01-01', 'Desconocido', '9780140449112', 'El épico viaje de regreso a casa de Odiseo.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780140449112-L.jpg'),
+# (24, 'Moby Dick', 'Herman Melville', 'aventura', 2, 2, '1851-10-18', 'Richard Bentley', '9780142437247', 'La obsesiva búsqueda de la ballena blanca.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780142437247-L.jpg'),
+# (25, 'Frankenstein', 'Mary Shelley', 'ciencia ficción gótica', 4, 4, '1818-01-01', 'Lackington, Hughes, Harding, Mavor & Jones', '9780486282114', 'La historia del monstruo y su creador.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780486282114-L.jpg'),
+# (26, 'Las aventuras de Tom Sawyer', 'Mark Twain', 'literatura juvenil', 5, 5, '1876-01-01', 'American Publishing Company', '9780486400754', 'Las travesuras de un niño en el río Misisipi.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780486400754-L.jpg'),
+# (27, 'Drácula', 'Bram Stoker', 'horror gótico', 3, 3, '1897-05-26', 'Archibald Constable & Co.', '9780141439846', 'El legendario vampiro de Transilvania.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780141439846-L.jpg'),
+# (28, 'Alicia en el país de las maravillas', 'Lewis Carroll', 'fantasía', 5, 5, '1865-11-26', 'Macmillan', '9780140369062', 'Las extravagantes aventuras de Alicia.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780140369062-L.jpg'),
+# (29, 'Los Miserables', 'Victor Hugo', 'novela histórica', 3, 3, '1862-01-01', 'A. Lacroix, Verboeckhoven & Cie.', '9780451419439', 'La épica historia de redención y justicia social.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780451419439-L.jpg'),
+# (30, 'Anna Karenina', 'León Tolstói', 'novela clásica', 4, 4, '1877-01-01', 'The Russian Messenger', '9780140449174', 'Un drama sobre el amor, la infidelidad y la sociedad.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780140449174-L.jpg'),
+# (31, 'El Retrato de Dorian Gray', 'Oscar Wilde', 'novela gótica', 4, 4, '1890-07-01', 'Lippincott''s Monthly Magazine', '9780141439570', 'La búsqueda de la eterna juventud y sus consecuencias.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780141439570-L.jpg'),
+# (32, 'Donde viven los monstruos', 'Maurice Sendak', 'literatura infantil', 5, 5, '1963-01-01', 'Harper & Row', '9780064430032', 'Un clásico álbum ilustrado.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780064430032-L.jpg'),
+# (33, 'Rebelión en la granja', 'George Orwell', 'sátira política', 4, 4, '1945-08-17', 'Secker & Warburg', '9780451526342', 'Una fábula sobre la corrupción del poder.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780451526342-L.jpg'),
+# (34, 'El guardián entre el centeno', 'J.D. Salinger', 'novela juvenil', 3, 3, '1951-07-16', 'Little, Brown and Company', '9780316769174', 'La historia de Holden Caulfield.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780316769174-L.jpg'),
+# (35, 'El señor de los anillos: La comunidad del anillo', 'J.R.R. Tolkien', 'fantasía épica', 5, 5, '1954-07-29', 'George Allen & Unwin', '9780618053267', 'El inicio de la épica trilogía.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780618053267-L.jpg'),
+# (36, 'Crónicas de Narnia: El león, la bruja y el armario', 'C.S. Lewis', 'fantasía', 5, 5, '1950-10-16', 'Geoffrey Bles', '9780064404996', 'La entrada al mágico mundo de Narnia.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780064404996-L.jpg'),
+# (37, 'Fahrenheit 451', 'Ray Bradbury', 'ciencia ficción', 4, 4, '1953-10-19', 'Ballantine Books', '9781451673315', 'Una sociedad donde los libros están prohibidos.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9781451673315-L.jpg'),
+# (38, 'Ulises', 'James Joyce', 'modernismo', 2, 2, '1922-02-02', 'Sylvia Beach', '9780679727357', 'Una de las obras más influyentes del siglo XX.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780679727357-L.jpg'),
+# (39, 'La metamorfosis', 'Franz Kafka', 'novela corta', 4, 4, '1915-01-01', 'Kurt Wolff Verlag', '9780486278858', 'La transformación de Gregor Samsa.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780486278858-L.jpg'),
+# (40, 'Cumbres Borrascosas', 'Emily Brontë', 'novela romántica', 3, 3, '1847-12-01', 'Thomas Cautley Newby', '9780141439556', 'Un apasionado romance gótico.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780141439556-L.jpg'),
+# (41, 'Lo que el viento se llevó', 'Margaret Mitchell', 'novela histórica', 3, 3, '1936-06-30', 'Macmillan Publishers', '9780446675545', 'Un clásico de la literatura estadounidense.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780446675545-L.jpg'),
+# (42, 'La Divina Comedia', 'Dante Alighieri', 'poesía épica', 2, 2, '1320-01-01', 'Desconocido', '9780140448856', 'El viaje a través del infierno, purgatorio y paraíso.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780140448856-L.jpg'),
+# (43, 'Las uvas de la ira', 'John Steinbeck', 'novela social', 3, 3, '1939-04-14', 'The Viking Press', '9780143039433', 'La lucha de una familia durante la Gran Depresión.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780143039433-L.jpg'),
+# (44, 'Cuentos de Canterbury', 'Geoffrey Chaucer', 'poesía', 2, 2, '1400-01-01', 'Desconocido', '9780140424386', 'Una colección de historias.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780140424386-L.jpg'),
+# (45, 'Crimen en el Orient Express', 'Agatha Christie', 'misterio', 5, 5, '1934-01-01', 'Collins Crime Club', '9780062073499', 'Un caso clásico de Hercule Poirot.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780062073499-L.jpg'),
+# (46, 'El Padrino', 'Mario Puzo', 'novela de crimen', 4, 4, '1969-03-10', 'G. P. Putnam''s Sons', '9780451167711', 'La saga de la familia Corleone.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780451167711-L.jpg'),
+# (47, 'Siddhartha', 'Hermann Hesse', 'novela filosófica', 4, 4, '1922-01-01', 'S. Fischer Verlag', '9780553208846', 'La búsqueda de la iluminación espiritual.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780553208846-L.jpg'),
+# (48, 'El nombre de la rosa', 'Umberto Eco', 'novela histórica', 3, 3, '1980-01-01', 'Fabbri Bompiani', '9780156001318', 'Un misterio medieval en una abadía.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780156001318-L.jpg'),
+# (49, 'El amor en los tiempos del cólera', 'Gabriel García Márquez', 'realismo mágico', 4, 4, '1985-01-01', 'Editorial Oveja Negra', '9780307388704', 'Una historia de amor a lo largo de décadas.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780307388704-L.jpg'),
+# (50, 'Crónica de una muerte anunciada', 'Gabriel García Márquez', 'novela corta', 5, 5, '1981-01-01', 'La Oveja Negra', '9780307474629', 'La historia de un asesinato predicho.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780307474629-L.jpg'),
+# (51, 'El Túnel', 'Ernesto Sábato', 'novela psicológica', 3, 3, '1948-01-01', 'Editorial Sur', '9789871107572', 'Una profunda reflexión sobre la soledad y la obsesión.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9789871107572-L.jpg'),
+# (52, 'Rayuela', 'Julio Cortázar', 'novela experimental', 2, 2, '1963-01-01', 'Editorial Sudamericana', '9789500725514', 'Una novela que puede ser leída de varias formas.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9789500725514-L.jpg'),
+# (53, 'La casa de los espíritus', 'Isabel Allende', 'realismo mágico', 4, 4, '1982-01-01', 'Plaza & Janés', '9780307474674', 'La saga de la familia Trueba.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780307474674-L.jpg'),
+# (54, 'Veinte poemas de amor y una canción desesperada', 'Pablo Neruda', 'poesía', 5, 5, '1924-01-01', 'Editorial Nascimento', '9780679727401', 'Un clásico de la poesía latinoamericana.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780679727401-L.jpg'),
+# (55, 'La sombra del viento', 'Carlos Ruiz Zafón', 'misterio', 4, 4, '2001-01-01', 'Editorial Planeta', '9788408039212', 'Un misterio literario ambientado en Barcelona.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9788408039212-L.jpg'),
+# (56, 'Como agua para chocolate', 'Laura Esquivel', 'realismo mágico', 3, 3, '1989-01-01', 'Editorial Planeta', '9780385721213', 'Una novela donde la comida y las emociones se entrelazan.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780385721213-L.jpg'),
+# (57, 'El alquimista', 'Paulo Coelho', 'novela espiritual', 5, 5, '1988-01-01', 'Editora Rocco', '9780061122415', 'Un viaje en busca del tesoro personal.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9780061122415-L.jpg'),
+# (58, 'El Aleph', 'Jorge Luis Borges', 'cuentos', 4, 4, '1949-01-01', 'Editorial Losada', '9789871107299', 'Una colección de cuentos fantásticos.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9789871107299-L.jpg'),
+# (59, 'Aura', 'Carlos Fuentes', 'novela corta', 3, 3, '1962-01-01', 'Ediciones Era', '9789684111246', 'Una atmósfera gótica y misteriosa.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9789684111246-L.jpg'),
+# (60, 'Pedro Páramo', 'Juan Rulfo', 'realismo mágico', 3, 3, '1955-01-01', 'Fondo de Cultura Económica', '9789681600877', 'Un viaje a un pueblo fantasma.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9789681600877-L.jpg'),
+# (61, 'La Tregua', 'Mario Benedetti', 'novela romántica', 4, 4, '1960-01-01', 'Editorial Sudamericana', '9789500725224', 'Un diario íntimo sobre el amor y la rutina.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9789500725224-L.jpg'),
+# (62, 'Cien sonetos de amor', 'Pablo Neruda', 'poesía', 5, 5, '1959-01-01', 'Editorial Losada', '9789500725804', 'Una colección de sonetos dedicados al amor.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9789500725804-L.jpg'),
+# (63, 'El llano en llamas', 'Juan Rulfo', 'cuentos', 4, 4, '1953-01-01', 'Fondo de Cultura Económica', '9789681604509', 'Cuentos sobre la vida rural en México.', '2025-07-03', 'disponible', 'https://covers.openlibrary.org/b/isbn/9789681604509-L.jpg');

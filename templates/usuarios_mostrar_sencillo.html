@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lista de Usuarios</title>
+  <!-- Bootstrap y Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/usuarios.css') }}">
+</head>
+<body class="bg-light text-dark p-4">
+
+  <!-- Botón Regresar -->
+  <div class="mb-4">
+    <a href="{{ url_for('main.inicio_contenido') }}" class="btn btn-secondary">
+      <i class="bi bi-arrow-left-circle me-1"></i> Regresar
+    </a>
+  </div>
+
+  <h2 class="mb-3">Lista de Usuarios</h2>
+
+  <div class="mb-3">
+    <input type="text" id="busqueda-usuario" class="form-control" placeholder="Buscar por nombre, correo o rol...">
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle" id="tabla-usuarios">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Email</th>
+          <th>Rol</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for usuario in usuarios %}
+        <tr data-id="{{ usuario.id }}" data-nombre="{{ usuario.nombre }}" data-email="{{ usuario.correo }}" data-rol="{{ usuario.rol }}">
+          <td>{{ usuario.id }}</td>
+          <td>{{ usuario.nombre }}</td>
+          <td>{{ usuario.correo }}</td>
+          <td>{{ usuario.rol }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Filtro en vivo sin acciones
+    document.addEventListener("DOMContentLoaded", function () {
+      const buscador = document.getElementById("busqueda-usuario");
+      buscador?.addEventListener("keyup", function () {
+        const filtro = this.value.toLowerCase();
+        const filas = document.querySelectorAll("#tabla-usuarios tbody tr");
+
+        filas.forEach(fila => {
+          const nombre = fila.dataset.nombre.toLowerCase();
+          const email = fila.dataset.email.toLowerCase();
+          const rol = fila.dataset.rol.toLowerCase();
+          const coincide = nombre.includes(filtro) || email.includes(filtro) || rol.includes(filtro);
+          fila.style.display = coincide ? "" : "none";
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!-- editar_reserva.html -->
+<div class="form-box2">
+    <h2 class="text-center text-white mb-3">Editar Reserva</h2>
+    <p class="descripcion-libro">Modifica los datos de la reserva y guarda los cambios.</p>
+
+    <form method="POST" action="{{ url_for('main.editar_reserva', reserva_id=reserva.id) }}">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            {{ form.libro_id.label(class="form-label") }}
+            {{ form.libro_id(class="form-control") }}
+            {% for error in form.libro_id.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.fecha_expiracion.label(class="form-label") }}
+            {{ form.fecha_expiracion(class="form-control", type="date") }}
+            {% for error in form.fecha_expiracion.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{{ url_for('main.reservas_tabla') }}" class="btn btn-danger">Cancelar</a>
+            {{ form.submit(class="btn btn-success") }}
+        </div>
+    </form>
+</div>
+
+<style>
+.form-box2 {
+    background-color: #1a1a40;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+    color: white;
+}
+.descripcion-libro {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 25px;
+    color: #ccc;
+}
+.form-label {
+    font-weight: bold;
+    color: white;
+}
+.form-control {
+    background-color: #1c1c3c;
+    border: 1px solid #555;
+    color: white;
+}
+.form-control::placeholder {
+    color: #aaa;
+}
+.form-control:focus {
+    border-color: #61dafb;
+    box-shadow: 0 0 0 0.2rem rgba(97, 218, 251, 0.25);
+}
+.btn-success {
+    background-color: #28a745;
+    border-radius: 25px;
+    border: none;
+    padding: 10px 20px;
+}
+.btn-danger {
+    border-radius: 25px;
+    padding: 10px 20px;
+}
+.text-danger {
+    color: #ff4c4c !important;
+}
+</style>

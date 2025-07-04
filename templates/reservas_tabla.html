@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lista de Reservas</title>
+  <!-- Bootstrap y Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/reservas.css') }}">
+</head>
+<body class="bg-light text-dark p-4">
+
+  <h2 class="mb-3">Lista de Reservas</h2>
+
+  <!-- 🔍 Buscador -->
+  <div class="mb-3">
+    <input type="text" id="busqueda-reserva" class="form-control" placeholder="Buscar por usuario, libro o estado...">
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered align-middle" id="tabla-reservas">
+      <thead class="table-light">
+        <tr>
+          <th>ID</th>
+          <th>Usuario</th>
+          <th>Libro</th>
+          <th>Fecha de Reserva</th>
+          <th>Fecha de Expiración</th>
+          <th>Estado</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for reserva in reservas %}
+        <tr data-usuario="{{ reserva.usuario.nombre | lower }}"
+            data-libro="{{ reserva.libro.titulo | lower }}"
+            data-estado="{{ reserva.estado | lower }}">
+          <td>{{ reserva.id }}</td>
+          <td>{{ reserva.usuario.nombre }}</td>
+          <td>{{ reserva.libro.titulo }}</td>
+          <td>{{ reserva.fecha_reserva.strftime('%Y-%m-%d') }}</td>
+          <td>{{ reserva.fecha_expiracion.strftime('%Y-%m-%d') }}</td>
+          <td>
+            {% if reserva.estado == 'activa' %}
+              <span class="badge bg-warning text-dark">Activa</span>
+            {% elif reserva.estado == 'confirmada' %}
+              <span class="badge bg-success">Confirmada</span>
+            {% elif reserva.estado == 'vencida' %}
+              <span class="badge bg-secondary">Vencida</span>
+            {% endif %}
+          </td>
+          <td class="text-center">
+            <div class="btn-group" role="group">
+              <!-- Botón Editar -->
+              <a href="{{ url_for('main.editar_reserva', reserva_id=reserva.id) }}" class="btn btn-sm btn-outline-primary d-inline-flex align-items-center">
+                <i class="bi bi-pencil-square me-1"></i> Editar
+              </a>
+              <!-- Botón Eliminar -->
+              <form action="{{ url_for('main.eliminar_reserva', reserva_id=reserva.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('¿Eliminar esta reserva?');">
+                <button type="submit" class="btn btn-sm btn-outline-danger d-inline-flex align-items-center">
+                  <i class="bi bi-trash me-1"></i> Eliminar
+                </button>
+              </form>
+              <!-- Botón Prestar -->
+              {% if reserva.estado == 'activa' %}
+              <form action="{{ url_for('main.prestar_reserva', reserva_id=reserva.id) }}" method="POST" style="display: inline;" onsubmit="return confirm('¿Prestar este libro ahora?');">
+                <button type="submit" class="btn btn-sm btn-outline-success d-inline-flex align-items-center">
+                  <i class="bi bi-check-circle me-1"></i> Prestar
+                </button>
+              </form>
+              {% endif %}
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.getElementById("busqueda-reserva").addEventListener("keyup", function () {
+      const filtro = this.value.toLowerCase();
+      const filas = document.querySelectorAll("#tabla-reservas tbody tr");
+
+      filas.forEach(fila => {
+        const usuario = fila.dataset.usuario;
+        const libro = fila.dataset.libro;
+        const estado = fila.dataset.estado;
+        const coincide = usuario.includes(filtro) || libro.includes(filtro) || estado.includes(filtro);
+        fila.style.display = coincide ? "" : "none";
+      });
+    });
+  </script>
+
+</body>
+</html>

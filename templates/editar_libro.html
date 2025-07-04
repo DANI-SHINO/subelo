@@ -1,0 +1,140 @@
+<!-- editar_libro.html -->
+<div class="form-box2">
+    <h2 class="text-center text-white mb-3">Editar libro: {{ libro.titulo }}</h2>
+    <p class="descripcion-libro">Modifica los datos del libro y guarda los cambios.</p>
+
+    <form method="POST" action="{{ url_for('main.editar_libro', libro_id=libro.id) }}">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            {{ form.titulo.label(class="form-label") }}
+            {{ form.titulo(class="form-control", placeholder="Título del libro") }}
+            {% for error in form.titulo.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.autor.label(class="form-label") }}
+            {{ form.autor(class="form-control", placeholder="Autor") }}
+            {% for error in form.autor.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.categoria.label(class="form-label") }}
+            {{ form.categoria(class="form-control") }}
+            {% for error in form.categoria.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.cantidad_total.label(class="form-label") }}
+            {{ form.cantidad_total(class="form-control", placeholder="Total de copias") }}
+            {% for error in form.cantidad_total.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.cantidad_disponible.label(class="form-label") }}
+            {{ form.cantidad_disponible(class="form-control", placeholder="Disponibles") }}
+            {% for error in form.cantidad_disponible.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.descripcion.label(class="form-label") }}
+            {{ form.descripcion(class="form-control", rows=3, placeholder="Descripción del libro") }}
+            {% for error in form.descripcion.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.editorial.label(class="form-label") }}
+            {{ form.editorial(class="form-control", placeholder="Editorial") }}
+            {% for error in form.editorial.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.fecha_publicacion.label(class="form-label") }}
+            {{ form.fecha_publicacion(class="form-control", type="date") }}
+            {% for error in form.fecha_publicacion.errors %}
+                <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+                <!-- Imagen actual de la portada -->
+        <div class="mb-3 text-center">
+            <label class="form-label d-block">Portada actual:</label>
+            <img src="{{ libro.portada_url }}" alt="Portada del libro" class="img-thumbnail" style="max-height: 200px;">
+        </div>
+         <!-- Campo oculto de URL de portada -->
+        {{ form.portada_url() }}
+
+        <div class="d-flex justify-content-between mt-4">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+            {{ form.submit(class="btn btn-success") }}
+        </div>
+    </form>
+</div>
+
+<style>
+    .form-box2 {
+        background-color: #1a1a40;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+        color: white;
+    }
+
+    .descripcion-libro {
+        text-align: center;
+        font-size: 1rem;
+        margin-bottom: 25px;
+        color: #ccc;
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: white;
+    }
+
+    .form-control {
+        background-color: #1c1c3c;
+        border: 1px solid #555;
+        color: white;
+    }
+
+    .form-control::placeholder {
+        color: #aaa;
+    }
+
+    .form-control:focus {
+        border-color: #61dafb;
+        box-shadow: 0 0 0 0.2rem rgba(97, 218, 251, 0.25);
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        border-radius: 25px;
+        border: none;
+        padding: 10px 20px;
+        font-weight: arial;
+    }
+
+    .btn-danger {
+        border-radius: 25px;
+        padding: 10px 20px;
+    }
+
+    .text-danger {
+        color: #ff4c4c !important;
+    }
+</style>

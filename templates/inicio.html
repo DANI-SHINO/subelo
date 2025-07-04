@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Panel Principal - Biblioteca</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- FontAwesome -->
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.css" rel="stylesheet" />
+
+  <!-- Estilos personalizados -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio.css') }}">
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/inicio.js') }}"></script>
+</head>
+<body>
+
+  <!-- CONTENEDOR PRINCIPAL SIN NAVBAR -->
+  <div class="dashboard-container">
+    <!-- Tarjetas -->
+    <a href="{{ url_for('main.mostrar_usuarios_sencillo') }}" class="small-box text-decoration-none">
+      <div class="inner">
+        <h3>{{ total_administradores }}</h3>
+        <p>Administradores</p>
+      </div>
+      <div class="icon"><i class="fas fa-user-shield"></i></div>
+    </a>
+
+    <a href="{{ url_for('main.mostrar_usuarios_sencillo') }}" class="small-box text-decoration-none">
+      <div class="inner">
+        <h3>{{ total_lectores }}</h3>
+        <p>Lectores</p>
+      </div>
+      <div class="icon"><i class="fas fa-users"></i></div>
+    </a>
+
+    <a href="{{ url_for('main.mostrar_libros_sencillo') }}" class="small-box text-decoration-none">
+      <div class="inner">
+        <h3>{{ total_libros }}</h3>
+        <p>Libros</p>
+      </div>
+      <div class="icon"><i class="fas fa-book"></i></div>
+    </a>
+
+    <a href="{{ url_for('main.mostrar_prestamos_sencillo') }}" class="small-box text-decoration-none">
+      <div class="inner">
+        <h3>{{ total_prestamos }}</h3>
+        <p>Préstamos</p>
+      </div>
+      <div class="icon"><i class="fas fa-handshake"></i></div>
+    </a>
+
+    <a href="{{ url_for('main.mostrar_reservas_sencillo') }}" class="small-box text-decoration-none">
+      <div class="inner">
+        <h3>{{ total_reservas }}</h3>
+        <p>Reservas</p>
+      </div>
+      <div class="icon"><i class="fas fa-calendar-check"></i></div>
+    </a>
+
+    <a href="{{ url_for('main.historial_reportes') }}" class="small-box text-decoration-none">
+      <div class="inner">
+        <h3>{{ total_reportes }}</h3>
+        <p>Reportes</p>
+      </div>
+      <div class="icon"><i class="fas fa-file-alt"></i></div>
+    </a>
+  </div>
+
+  <!-- GRÁFICAS FULL WIDTH -->
+  <div class="container-fluid my-5 px-5">
+    <div class="row gy-4">
+      <div class="col-lg-6">
+        <div class="report-box">
+          <h6><i class="fas fa-book me-2"></i> Libros más prestados</h6>
+          <canvas id="graficoLibrosPopulares"></canvas>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="report-box">
+          <h6><i class="fas fa-clock me-2"></i> Libros con más retrasos</h6>
+          <canvas id="graficoLibrosAtrasados"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Librerías -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='js/graficas.js') }}"></script>
+</body>
+</html>
